@@ -1,0 +1,32 @@
+name: Maintain GitHub Streak
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+    - cron: "0 18 * * *"
+
+  workflow_dispatch:
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set Git Config
+        run: |
+          git config --global user.name "rishanmenezes"
+          git config --global user.email "rishanmenezes05@gmail.com"
+
+      - name: Create Empty Commit
+        run: |
+          git commit --allow-empty -m "Daily streak commit"
+
+      - name: Push Changes
+        run: |
+          git push
